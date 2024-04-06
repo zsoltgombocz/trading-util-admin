@@ -16,15 +16,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('stock');
-
-            //Represents how many days passed from the BUY to the SELL, also can be calculated from the
-            //buy_occurred_at and sell_occurred_at
-            $table->integer('active_days')->nullable();
-
             $table->integer('open_positions'); //How many BUY was added until it reached the SELL LIMIT
             $table->text('note')->nullable();
             $table->timestamp('buy_occurred_at')->nullable();
-            $table->timestamp('sell_occurred_at')->nullable();
+            $table->timestamp('sell_occurred_at');
         });
     }
 

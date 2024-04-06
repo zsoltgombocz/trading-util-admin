@@ -11,7 +11,7 @@ class ClosedTrades extends Model
     use HasFactory;
 
     protected $fillable = [
-        'stock', 'active_days', 'open_positions', 'note', 'buy_occurred_at', 'sell_occurred_at'
+        'stock', 'open_positions', 'note', 'buy_occurred_at', 'sell_occurred_at'
     ];
 
     protected $casts = [
@@ -19,12 +19,8 @@ class ClosedTrades extends Model
         'sell_occurred_at' => 'datetime',
     ];
 
-    public function activeDays(): int
+    public function getActiveDaysAttribute(): int
     {
-        if($this->active_days) {
-            return $this->active_days;
-        }
-
         if($this->buy_occurred_at && $this->sell_occurred_at) {
             return $this->buy_occurred_at->diffIndays($this->sell_occurred_at);
         }
